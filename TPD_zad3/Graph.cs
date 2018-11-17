@@ -32,19 +32,10 @@ namespace TPD_zad3
             NodeSet.Add(new GraphNode<T>(value));
         }
 
-        public void AddDirectedEdge(GraphNode<T> from, GraphNode<T> to, int cost)
+        public void AddUndirectedEdge(GraphNode<T> from, GraphNode<T> to)
         {
             from.Neighbours.Add(to);
-            from.Costs.Add(cost);
-        }
-
-        public void AddUndirectedEdge(GraphNode<T> from, GraphNode<T> to, int cost)
-        {
-            from.Neighbours.Add(to);
-            from.Costs.Add(cost);
-
             to.Neighbours.Add(from);
-            to.Costs.Add(cost);
         }
 
         public bool Contains(T value)
@@ -71,7 +62,6 @@ namespace TPD_zad3
                 {
                     // remove the reference to the node and associated cost
                     gnode.Neighbours.RemoveAt(index);
-                    gnode.Costs.RemoveAt(index);
                 }
             }
 
