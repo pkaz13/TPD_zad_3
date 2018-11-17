@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace TPD_zad3
 {
-    public class GraphNode<T> : Node<T>
+    public class GraphNode<T>
     {
+        public T Data { get; set; }
+        public NodeList<T> Neighbours { get; set; }
+
         private List<int> costs;
 
         public List<int> Costs
@@ -20,19 +23,16 @@ namespace TPD_zad3
             }
         }
 
-        public new NodeList<T> Neighbours
+        public GraphNode() { }
+        public GraphNode(T data)
         {
-            get
-            {
-                if (base.Neighbours == null)
-                    base.Neighbours = new NodeList<T>();
-
-                return base.Neighbours;
-            }
+            Data = data;
+            Neighbours = new NodeList<T>();
         }
-
-        public GraphNode() : base() { }
-        public GraphNode(T value) : base(value) { }
-        public GraphNode(T value, NodeList<T> neighbors) : base(value, neighbors) { }
+        public GraphNode(T data, NodeList<T> neighbours)
+        {
+            Data = data;
+            Neighbours = neighbours;
+        }
     }
 }

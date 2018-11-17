@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TPD_zad3
 {
-    public class NodeList<T> : Collection<Node<T>>
+    public class NodeList<T> : Collection<GraphNode<T>>
     {
         public NodeList() : base() { }
 
@@ -15,13 +15,13 @@ namespace TPD_zad3
         {
             // Add the specified number of items
             for (int i = 0; i < initialSize; i++)
-                base.Items.Add(default(Node<T>));
+                base.Items.Add(default(GraphNode<T>));
         }
 
-        public Node<T> FindByValue(T value)
+        public GraphNode<T> FindByValue(T value)
         {
             // search the list for the value
-            foreach (Node<T> node in Items)
+            foreach (GraphNode<T> node in Items)
                 if (node.Data.Equals(value))
                     return node;
 
