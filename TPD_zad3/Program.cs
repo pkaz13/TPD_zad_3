@@ -84,7 +84,7 @@ namespace TPD_zad3
             }
 
             //order by node
-            summaries.OrderBy(x => x.Node);
+            summaries = summaries.OrderBy(x => x.Node).ToList();
 
             //add last node to route
             foreach (var item in summaries)
