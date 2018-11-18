@@ -51,6 +51,7 @@ namespace TPD_zad3
             network.NodeSet.FindByValue(5).EdgeInfos.Add(new EdgeInfo<int> { from = 3, to = 5, cost = 3 });
             network.NodeSet.FindByValue(5).EdgeInfos.Add(new EdgeInfo<int> { from = 4, to = 5, cost = 1 });
 
+            //create tag for first node, mark it as permanent
             GraphNode<int> node1 = network.NodeSet.FindByValue(1);
             node1.Tag[0] = 0;
             node1.Tag[1] = 0;
