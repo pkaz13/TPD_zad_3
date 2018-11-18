@@ -58,6 +58,7 @@ namespace TPD_zad3
 
             List<Summary> summaries = new List<Summary>();
 
+            //main algorithm
             GraphNode<int> currentNode = null;
             for (int i = 0; i < network.NodeSet.Count; i++)
             {
@@ -81,11 +82,31 @@ namespace TPD_zad3
                 }
             }
 
+            //order by node
+            summaries.OrderBy(x => x.Node);
+
+            //add last node to route
             foreach (var item in summaries)
             {
                 item.ShortestRoute.Add(item.Node);
             }
-            summaries.OrderBy(x => x.Node);
+
+            //print summary to console
+            StringBuilder builder = new StringBuilder();
+            foreach (var item in summaries)
+            {
+                builder.Append($"Węzeł: {item.Node}, Dystans: {item.Distance}, Najkrótsza droga: ");
+                var last = item.ShortestRoute.Last();
+                foreach (var route in item.ShortestRoute)
+                {
+                    if (route.Equals(last) == false)
+                        builder.Append($"{route} - ");
+                    else
+                        builder.Append($"{route}");
+                }
+                builder.Append(Environment.NewLine);
+            }
+            Console.WriteLine(builder);
             Console.ReadLine();
         }
     }
