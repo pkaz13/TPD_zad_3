@@ -56,35 +56,36 @@ namespace TPD_zad3
             node1.Tag[1] = 0;
             node1.IsTagPermanent = true;
 
+            List<Summary> summaries = new List<Summary>();
+
             GraphNode<int> currentNode = null;
             for (int i = 0; i < network.NodeSet.Count; i++)
             {
                 if (i == 0)
                     currentNode = network.NodeSet.FindByValue(1);
                 else
+                {
                     currentNode = currentNode.ChangeTagToPermanent();
-
+                    summaries.Add(new Summary { Node = currentNode.Data, ShortestRoute = currentNode.VisitedNodes, Distance = currentNode.Tag[0] });
+                }
+                
                 foreach (var item in currentNode.Neighbours)
                 {
-                    item.Tag[0] = item.EdgeInfos.Where(x => (x.from == currentNode.Data || x.from == item.Data) && (x.to == item.Data || x.to == currentNode.Data)).Select(x => x.cost).First();
-                    item.Tag[1] = currentNode.Data;
-                    item.CurrentCost = item.Tag[0];
+                    if (item.IsTagPermanent == false)
+                    {
+                        item.Tag[0] = currentNode.CurrentCost + item.EdgeInfos.Where(x => (x.from == currentNode.Data || x.from == item.Data) && (x.to == item.Data || x.to == currentNode.Data)).Select(x => x.cost).First();
+                        item.Tag[1] = currentNode.Data;
+                        item.CurrentCost = item.Tag[0];
+                        item.VisitedNodes.Add(currentNode.Data);
+                    }
                 }
             }
 
-            //foreach (var node in network.NodeSet)
-            //{
-            //    foreach (var item in node.Neighbours)
-            //    {
-            //        if (item.IsTagPermanent == false)
-            //        {
-            //            item.Tag[0] = node.CurrentCost + node.EdgeInfos.Where(x => (x.from == node.Data || x.from == item.Data) && (x.to == item.Data || x.to == node.Data)).Select(x => x.cost).First();
-            //            item.Tag[1] = node.Data;
-            //            item.IsTagPermanent = false;
-            //            item.CurrentCost = item.Tag[0];
-            //        }
-            //    }
-            //}
+            foreach (var item in summaries)
+            {
+                item.ShortestRoute.Add(item.Node);
+            }
+            summaries.OrderBy(x => x.Node);
             Console.ReadLine();
         }
     }

@@ -14,7 +14,7 @@ namespace TPD_zad3
         public bool IsTagPermanent { get; set; }
         public List<EdgeInfo<T>> EdgeInfos { get; set; }
         public int CurrentCost { get; set; }
-
+        public List<int> VisitedNodes { get; set; }
 
         public GraphNode() { }
         public GraphNode(T data)
@@ -24,6 +24,7 @@ namespace TPD_zad3
             Tag = new int[2];
             IsTagPermanent = false;
             EdgeInfos = new List<EdgeInfo<T>>();
+            VisitedNodes = new List<int>();
         }
         public GraphNode(T data, NodeList<T> neighbours)
         {
@@ -32,6 +33,7 @@ namespace TPD_zad3
             Tag = new int[2];
             IsTagPermanent = false;
             EdgeInfos = new List<EdgeInfo<T>>();
+            VisitedNodes = new List<int>();
         }
 
         public GraphNode<T> ChangeTagToPermanent()
